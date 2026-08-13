@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="bn">
   <head>
@@ -30,6 +31,7 @@
         --gold: #d4a017;
         --gray: #6b6b6b;
         --blue: #2563eb;
+        --green: #16a34a;
         --line: #eae5db;
         --radius: 16px;
         --shadow: 0 10px 30px rgba(17, 17, 17, 0.08);
@@ -46,7 +48,6 @@
         background: var(--cream);
         color: var(--ink);
         margin: 0;
-        padding-bottom: 78px;
       }
       h1,
       h2,
@@ -63,23 +64,7 @@
         display: block;
       }
 
-      /* ===== Top bar ===== */
-      .topbar {
-        background: var(--black);
-        color: #fff;
-        font-size: 0.82rem;
-        padding: 6px 0;
-      }
-      .topbar a {
-        color: #fff;
-        opacity: 0.85;
-      }
-      .topbar a:hover {
-        opacity: 1;
-        color: var(--gold);
-      }
-
-      /* ===== Nav ===== */
+      /* ===== Top bar / Nav ===== */
       .navwrap {
         background: #fff;
         border-bottom: 1px solid var(--line);
@@ -288,11 +273,18 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.35rem;
         box-shadow:
           0 0 0 8px rgba(193, 18, 31, 0.16),
           0 10px 22px rgba(193, 18, 31, 0.45);
         z-index: 3;
+        overflow: hidden;
+      }
+      /* Icon image inside the radar pin — replace src with your own icon */
+      .radar-pin img {
+        width: 26px;
+        height: 26px;
+        object-fit: contain;
+        filter: brightness(0) invert(1); /* makes a simple line icon white */
       }
       .hero-chip {
         position: absolute;
@@ -309,6 +301,11 @@
         gap: 0.4rem;
         z-index: 4;
         white-space: nowrap;
+      }
+      .hero-chip img {
+        width: 14px;
+        height: 14px;
+        object-fit: contain;
       }
       .chip-dot {
         width: 6px;
@@ -410,6 +407,11 @@
         background: var(--red-dark);
         color: #fff;
         transform: translateY(-1px);
+      }
+      .btn-primary-red:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        transform: none;
       }
       .btn-outline-dark2 {
         border: 2px solid var(--black);
@@ -551,7 +553,6 @@
         border-radius: var(--radius);
         padding: 1.6rem;
         height: 100%;
-        cursor: pointer;
         transition: 0.2s;
         position: relative;
       }
@@ -596,25 +597,175 @@
         border-radius: 8px;
         margin-top: 0.3rem;
       }
-      .pack-radio {
+      .pack-desc {
+        font-size: 0.85rem;
+        color: var(--gray);
+        margin-top: 0.5rem;
+      }
+      .pack-thumb {
+        position: relative;
+        height: 190px;
+        border-radius: 14px;
+        background: #fff;
+        border: 1px solid var(--line);
+        margin-bottom: 1.1rem;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px;
+      }
+      .pack-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 10px;
+      }
+      .pack-thumb-badge {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        z-index: 3;
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 0.32rem 0.65rem;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+      .pack-thumb-badge.voice {
+        background: rgba(212, 160, 23, 0.9);
+        border: 1px solid rgba(212, 160, 23, 0.4);
+        color: #3a2c05;
+      }
+      .pack-thumb-badge.basic {
+        background: rgba(37, 99, 235, 0.9);
+        border: 1px solid rgba(37, 99, 235, 0.4);
+        color: #fff;
+      }
+
+      /* Pack card quantity stepper (add multiple products to cart) */
+      .pack-qty-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.6rem;
+        margin-top: 1.1rem;
+        padding-top: 1rem;
+        border-top: 1px dashed var(--line);
+      }
+      .pack-qty-controls {
+        display: flex;
+        align-items: center;
+        border: 1.5px solid var(--line);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .pack-qty-btn {
+        background: var(--cream);
+        border: none;
+        width: 38px;
+        height: 40px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--ink);
+        cursor: pointer;
+      }
+      .pack-qty-btn:hover {
+        background: #efe9db;
+      }
+      .pack-qty-val {
+        width: 40px;
+        text-align: center;
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+      .pack-added-badge {
+        display: none;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--green);
+      }
+      .pack-card.selected .pack-added-badge {
+        display: inline-flex;
+      }
+
+      /* ===== Product description tabs ===== */
+      .desc-tabs .nav-link {
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 0.92rem;
+        color: var(--ink);
+        border: 1.5px solid var(--line);
+        padding: 0.6rem 1.3rem;
+        margin-right: 0.6rem;
+        background: #fff;
+      }
+      .desc-tabs .nav-link.active {
+        background: var(--red);
+        border-color: var(--red);
+        color: #fff !important;
+      }
+      .desc-panel {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 1.8rem;
+        margin-top: 1.5rem;
+      }
+      .desc-panel h4 {
+        font-weight: 800;
+        font-size: 1.25rem;
+        margin-bottom: 0.3rem;
+      }
+      .desc-panel .desc-tagline {
+        color: var(--red);
+        font-weight: 700;
+        font-size: 0.9rem;
+        margin-bottom: 0.7rem;
+      }
+      .desc-panel .desc-intro {
+        color: var(--gray);
+        font-size: 0.95rem;
+        margin-bottom: 1.2rem;
+      }
+      .desc-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem 1.5rem;
+      }
+      @media (max-width: 767.98px) {
+        .desc-list {
+          grid-template-columns: 1fr;
+        }
+      }
+      .desc-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        color: var(--ink);
+      }
+      .desc-list li::before {
+        content: "✓";
+        flex-shrink: 0;
         width: 20px;
         height: 20px;
         border-radius: 50%;
-        border: 2px solid #cfcfcf;
-        display: inline-flex;
+        background: rgba(22, 163, 74, 0.12);
+        color: var(--green);
+        font-weight: 800;
+        font-size: 0.72rem;
+        display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 0.6rem;
-      }
-      .pack-card.selected .pack-radio {
-        border-color: var(--red);
-      }
-      .pack-card.selected .pack-radio::after {
-        content: "";
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        background: var(--red);
+        margin-top: 0.1rem;
       }
 
       /* ===== Order form (checkout style) ===== */
@@ -719,41 +870,6 @@
         font-weight: 600;
       }
 
-      /* Qty box */
-      .qty-box {
-        display: flex;
-        align-items: center;
-        border: 1.5px solid var(--line);
-        border-radius: 10px;
-        overflow: hidden;
-        width: fit-content;
-      }
-      .qty-box button {
-        background: var(--cream);
-        border: none;
-        width: 38px;
-        height: 40px;
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: var(--ink);
-      }
-      .qty-box input {
-        border: none;
-        width: 48px;
-        text-align: center;
-        font-weight: 700;
-        -moz-appearance: textfield;
-      }
-      .qty-box-sm button {
-        width: 30px;
-        height: 32px;
-        font-size: 0.95rem;
-      }
-      .qty-box-sm input {
-        width: 34px;
-        font-size: 0.85rem;
-      }
-
       /* Order summary card */
       .summary-card {
         background: #fff;
@@ -798,12 +914,47 @@
         height: 56px;
         border-radius: 12px;
         flex-shrink: 0;
-        background: linear-gradient(155deg, #1b1b1b, #0c0c0c);
+        background: #fff;
+        border: 1px solid var(--line);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.4rem;
         box-shadow: var(--shadow);
+        position: relative;
+      }
+      .summary-product-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 12px;
+      }
+      .summary-product-remove {
+        position: absolute;
+        top: -8px;
+        left: -8px;
+        background: #fff;
+        border: 1.5px solid var(--line);
+        color: var(--gray);
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1;
+        cursor: pointer;
+        transition: 0.15s;
+        padding: 0;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        z-index: 10;
+      }
+      .summary-product-remove:hover {
+        background: var(--red);
+        border-color: var(--red);
+        color: #fff;
       }
       .summary-product-info {
         flex: 1;
@@ -824,6 +975,15 @@
         font-size: 0.92rem;
         color: var(--ink);
         white-space: nowrap;
+      }
+      .summary-empty {
+        text-align: center;
+        color: var(--gray);
+        font-size: 0.88rem;
+        padding: 1.2rem 0.5rem;
+        border: 1.5px dashed var(--line);
+        border-radius: 12px;
+        margin-bottom: 1rem;
       }
       .summary-row {
         display: flex;
@@ -1007,9 +1167,6 @@
         .mobile-order-bar {
           display: flex;
         }
-        body {
-          padding-bottom: 78px;
-        }
         .section-title {
           font-size: 1.5rem;
         }
@@ -1031,14 +1188,6 @@
     </style>
   </head>
   <body>
-    <!-- ===== Top bar ===== -->
-    <!-- <div class="topbar">
-      <div class="container d-flex justify-content-between align-items-center">
-        <span>🚚 সারাদেশে হোম ডেলিভারি | 💵 ক্যাশ অন ডেলিভারি সুবিধা</span>
-        <a href="tel:+8801700000000">📞 কল করুন: 01700-000000</a>
-      </div>
-    </div> -->
-
     <!-- ===== Nav ===== -->
     <div class="navwrap">
       <div class="container">
@@ -1068,7 +1217,7 @@
 
             <div class="hero-cta-row d-flex flex-wrap gap-2">
               <a href="#order" class="btn-primary-red"
-                >🛒 অর্ডার করুন — মাত্র ২,৯৯০৳</a
+                >🛒 অর্ডার করুন — মাত্র ২,৯০০৳ থেকে</a
               >
               <a href="#features" class="btn-outline-light2">ফিচারসমূহ দেখুন</a>
             </div>
@@ -1096,7 +1245,10 @@
                 <div class="radar-ring r1"></div>
                 <div class="radar-ring r2"></div>
                 <div class="radar-ring r3"></div>
-                <div class="radar-pin">🚗</div>
+                <!-- 🖼️ radar center icon — replace with your own PNG/SVG (transparent, white/line-art works best) -->
+                <div class="radar-pin">
+                  <img src="asset/icon-car.png" alt="Car" />
+                </div>
 
                 <span class="hero-chip signal-chip">📶 সিগন্যাল কানেক্টেড</span>
                 <span class="hero-chip speed-chip"
@@ -1117,7 +1269,7 @@
           </div>
         </div>
 
-        <div class="row justify-content-center trust-strip text-center">
+        <div class="row justify-content-center gap-3 trust-strip text-center">
           <div class="col-auto">
             <span class="trust-pill"
               ><span class="dot"></span>১০০% অরিজিনাল প্রোডাক্ট</span
@@ -1163,7 +1315,7 @@
               <h3>ভয়েস মনিটরিং ফিচার</h3>
               <p>
                 প্রয়োজনে গাড়ির ভেতরের সাউন্ড শোনার সুবিধা — এক্সট্রা সিকিউরিটি
-                লেয়ার।
+                লেয়ার। (Voice Control ভ্যারিয়েন্টে থাকছে)
               </p>
             </div>
           </div>
@@ -1304,42 +1456,167 @@
     <section id="pricing">
       <div class="container">
         <div class="text-center mx-auto" style="max-width: 680px">
-          <span class="section-eyebrow">প্যাকেজ বেছে নিন</span>
+          <span class="section-eyebrow">প্রোডাক্ট বেছে নিন</span>
           <h2 class="section-title">আজই অর্ডার করুন, বিশেষ ছাড়ে</h2>
           <p class="section-sub mx-auto">
-            একটি প্যাকেজ সিলেক্ট করুন — নিচে অর্ডার ফর্মে মূল্য অটোমেটিক আপডেট
-            হবে।
+            চাইলে দুটো প্রোডাক্টই কার্টে যোগ করতে পারবেন — নিচে + / − বাটনে
+            চাপুন, অর্ডার সামারি অটোমেটিক আপডেট হবে।
           </p>
         </div>
 
         <div class="row g-3 mt-3 justify-content-center" id="packRow">
           <div class="col-12 col-md-5 col-lg-4">
-            <div
-              class="pack-card"
-              data-price="2990"
-              data-qty="1"
-              data-label="১টি GPS Tracker"
-            >
-              <span class="pack-radio"></span>
-              <div class="pack-title">১টি GPS Tracker</div>
-              <div class="pack-old">৳৩,৫০০</div>
-              <div class="pack-new">৳২,৯৯০</div>
-              <span class="pack-save">৫১০৳ সাশ্রয়</span>
+            <div class="pack-card" data-sku="GPS-VC-01">
+              <span class="badge-best">জনপ্রিয়</span>
+              <div class="pack-thumb">
+                <span class="pack-thumb-badge voice">🎙️ Voice</span>
+                <img src="asset/voice.webp" alt="GPS Tracker Voice Control" loading="lazy" />
+              </div>
+              <div class="pack-title">GPS Tracker (Voice Control)</div>
+              <div class="pack-old">৳৭,০০০</div>
+              <div class="pack-new">৳৩,৯০০</div>
+              <span class="pack-save">৩,১০০৳ সাশ্রয়</span>
+              <p class="pack-desc">
+                লাইভ ট্র্যাকিং সহ ভয়েস মনিটরিং ফিচার যুক্ত — গাড়ির ভেতরের
+                সাউন্ড শোনার সুবিধা।
+              </p>
+              <div class="pack-qty-row">
+                <div class="pack-qty-controls">
+                  <button type="button" class="pack-qty-btn" data-action="minus">−</button>
+                  <span class="pack-qty-val">0</span>
+                  <button type="button" class="pack-qty-btn" data-action="plus">+</button>
+                </div>
+                <span class="pack-added-badge">✓ কার্টে যুক্ত</span>
+              </div>
             </div>
           </div>
           <div class="col-12 col-md-5 col-lg-4">
-            <div
-              class="pack-card"
-              data-price="5490"
-              data-qty="2"
-              data-label="২টি GPS Tracker (কম্বো)"
+            <div class="pack-card" data-sku="GPS-NV-01">
+              <div class="pack-thumb">
+                <span class="pack-thumb-badge basic">📍 Basic</span>
+                <img src="asset/non voice.webp" alt="GPS Tracker Non Voice" loading="lazy" />
+              </div>
+              <div class="pack-title">GPS Tracker (Non Voice)</div>
+              <div class="pack-old">৳৫,০০০</div>
+              <div class="pack-new">৳২,৯০০</div>
+              <span class="pack-save">২,১০০৳ সাশ্রয়</span>
+              <p class="pack-desc">
+                রিয়েল-টাইম লাইভ ট্র্যাকিং ও জিও-ফেন্স অ্যালার্ট — ভয়েস মনিটরিং
+                ছাড়া বেসিক সিকিউরিটি প্যাকেজ।
+              </p>
+              <div class="pack-qty-row">
+                <div class="pack-qty-controls">
+                  <button type="button" class="pack-qty-btn" data-action="minus">−</button>
+                  <span class="pack-qty-val">0</span>
+                  <button type="button" class="pack-qty-btn" data-action="plus">+</button>
+                </div>
+                <span class="pack-added-badge">✓ কার্টে যুক্ত</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Product Description Tabs ===== -->
+    <section class="section-alt">
+      <div class="container">
+        <div class="text-center mx-auto" style="max-width: 680px">
+          <span class="section-eyebrow">বিস্তারিত বিবরণ</span>
+          <h2 class="section-title">প্রোডাক্ট সম্পর্কে বিস্তারিত জানুন</h2>
+          <p class="section-sub mx-auto">
+            দুটো ভ্যারিয়েন্টের ফিচার আলাদাভাবে দেখতে নিচের ট্যাব থেকে বেছে
+            নিন।
+          </p>
+        </div>
+
+        <ul class="nav desc-tabs justify-content-center mt-4" id="descTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link active"
+              id="tab-voice-btn"
+              data-bs-toggle="tab"
+              data-bs-target="#tab-voice"
+              type="button"
+              role="tab"
             >
-              <span class="badge-best">জনপ্রিয়</span>
-              <span class="pack-radio"></span>
-              <div class="pack-title">২টি GPS Tracker (কম্বো)</div>
-              <div class="pack-old">৳৭,০০০</div>
-              <div class="pack-new">৳৫,৪৯০</div>
-              <span class="pack-save">১,৫১০৳ সাশ্রয়</span>
+              🎙️ Voice Control
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="tab-basic-btn"
+              data-bs-toggle="tab"
+              data-bs-target="#tab-basic"
+              type="button"
+              role="tab"
+            >
+              📍 Non Voice (Basic)
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="descTabContent">
+          <div class="tab-pane fade show active" id="tab-voice" role="tabpanel">
+            <div class="desc-panel">
+              <h4>GPS Tracker (Voice Control) – স্মার্ট ভেহিকল সিকিউরিটি সলিউশন</h4>
+              <div class="desc-tagline">
+                রিয়েল-টাইম ট্র্যাকিং + ভয়েস মনিটরিং ফিচার সহ
+              </div>
+              <p class="desc-intro">
+                আপনার গাড়ি বা বাইকের নিরাপত্তায় এবার যোগ হলো আরও এক ধাপ
+                এগিয়ে থাকা সুবিধা — ভয়েস কন্ট্রোল ফিচার! এই GPS Tracker শুধু
+                লোকেশনই ট্র্যাক করে না, বরং প্রয়োজনে গাড়ির ভেতরের সাউন্ডও
+                শোনার সুবিধা দেয়। মোবাইল অ্যাপের মাধ্যমে লাইভ লোকেশন, স্পিড,
+                ট্রিপ হিস্টোরি সহ সবকিছু রিয়েল-টাইমে মনিটর করা যায়, যা আপনার
+                গাড়িকে রাখবে সম্পূর্ণ নিরাপদ।
+              </p>
+              <ul class="desc-list">
+                <li>ভয়েস মনিটরিং ফিচার — প্রয়োজনে গাড়ির ভেতরের সাউন্ড শোনার সুবিধা</li>
+                <li>রিয়েল-টাইম লাইভ ট্র্যাকিং — যেকোনো সময় সঠিক অবস্থান জানা যায়</li>
+                <li>ইনস্ট্যান্ট অ্যালার্ট — এলাকা ছাড়লে বা সমস্যা হলে সাথে সাথে নোটিফিকেশন</li>
+                <li>জিও-ফেন্স প্রোটেকশন — সীমানা ক্রস করলেই এলার্ট আসবে</li>
+                <li>হিস্টোরি প্লেব্যাক — আগের ট্রিপের সম্পূর্ণ রুট পরে দেখা যায়</li>
+                <li>দীর্ঘস্থায়ী ব্যাটারি লাইফ — বারবার চার্জ দেওয়ার ঝামেলা নেই</li>
+                <li>ইউজার-ফ্রেন্ডলি মোবাইল অ্যাপ — লাইভ ট্র্যাক, হিস্টোরি ম্যানেজ করা যায়</li>
+                <li>স্পিড, পাওয়ার স্ট্যাটাস, ট্রিপ টাইম ও মোট দূরত্ব এক স্ক্রিনেই</li>
+                <li>সহজ ইনস্টলেশন — যেকোনো গাড়ি বা ভেহিকলে সহজে লাগানো যায়</li>
+                <li>স্ট্রং সিগন্যাল কানেকশন — নির্ভুল ও দ্রুত লোকেশন আপডেট</li>
+                <li>মজবুত ও ওয়েদার-রেজিস্ট্যান্ট বডি — বাইরের পরিবেশে নিরাপদ</li>
+                <li>এক্সট্রা সিকিউরিটি লেয়ার — ভয়েস ফিচারের কারণে বাড়তি সতর্কতা</li>
+                <li>পরিবারের গাড়ি, ব্যবসায়িক ফ্লিট বা ব্যক্তিগত ভেহিকল — সব ব্যবহারের জন্য উপযুক্ত</li>
+              </ul>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="tab-basic" role="tabpanel">
+            <div class="desc-panel">
+              <h4>Basic GPS Tracker (Non Voice) – স্মার্ট ভেহিকল সিকিউরিটি সলিউশন</h4>
+              <div class="desc-tagline">
+                কম্প্যাক্ট রাউন্ড ডিজাইন | রিয়েল-টাইম জিপিএস ট্র্যাকিং
+              </div>
+              <p class="desc-intro">
+                ছোট, স্মার্ট কিন্তু শক্তিশালী — এই বেসিক জিপিএস ট্র্যাকারটি
+                আপনার গাড়ি, বাইক, ব্যাগ বা যেকোনো মূল্যবান জিনিসের লোকেশন
+                ট্র্যাক করার জন্য পারফেক্ট। কম্প্যাক্ট রাউন্ড ডিজাইনের কারণে
+                সহজে যেকোনো জায়গায় লাগানো বা বহন করা যায়। মোবাইল অ্যাপের
+                মাধ্যমে রিয়েল-টাইম লোকেশন, হিস্টোরি ও অ্যালার্ট সহজেই মনিটর
+                করা যায়।
+              </p>
+              <ul class="desc-list">
+                <li>রিয়েল-টাইম লাইভ ট্র্যাকিং — যেকোনো সময় সঠিক অবস্থান জানা যায়</li>
+                <li>ইনস্ট্যান্ট অ্যালার্ট — এলাকা ছাড়লে বা মুভমেন্ট হলে সাথে সাথে নোটিফিকেশন</li>
+                <li>জিও-ফেন্স প্রোটেকশন — সীমানা ক্রস করলেই এলার্ট আসবে</li>
+                <li>হিস্টোরি প্লেব্যাক — আগের রুট ও মুভমেন্টের তথ্য পরে দেখা যায়</li>
+                <li>দীর্ঘস্থায়ী ব্যাটারি লাইফ — কম চার্জেই দীর্ঘদিন ব্যবহার করা যায়</li>
+                <li>কম্প্যাক্ট ও পোর্টেবল রাউন্ড ডিজাইন — চাবির রিং বা ব্যাগে লাগানো যায়</li>
+                <li>ভয়েস ফিচার ছাড়া বেসিক ভার্সন — সিম্পল ও সহজ ট্র্যাকিং সলিউশন</li>
+                <li>ইউজার-ফ্রেন্ডলি মোবাইল অ্যাপ — সহজে সেটিংস ম্যানেজ করা যায়</li>
+                <li>স্পিড, পাওয়ার স্ট্যাটাস, ট্রিপ টাইম ও মোট দূরত্ব এক স্ক্রিনেই</li>
+                <li>সহজ ইনস্টলেশন — গাড়ি, বাইক, ব্যাগ যেকোনো কিছুতে লাগানো যায়</li>
+                <li>স্ট্রং সিগন্যাল কানেকশন — নির্ভুল ও দ্রুত লোকেশন আপডেট</li>
+                <li>চুরি প্রতিরোধ ও নিরাপত্তা নিশ্চিত করতে একটি নির্ভরযোগ্য সমাধান</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -1407,6 +1684,30 @@
                     class="accordion-button"
                     type="button"
                     data-bs-toggle="collapse"
+                    data-bs-target="#faq0"
+                  >
+                    Voice Control আর Non Voice ভার্সনের পার্থক্য কী?
+                  </button>
+                </h2>
+                <div
+                  id="faq0"
+                  class="accordion-collapse collapse show"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    দুটো ভার্সনেই লাইভ ট্র্যাকিং, জিও-ফেন্স ও অ্যালার্ট
+                    থাকছে। Voice Control ভার্সনে অতিরিক্ত ভয়েস মনিটরিং
+                    ফিচার আছে — যার মাধ্যমে অ্যাপ থেকে গাড়ির ভেতরের সাউন্ড
+                    শোনা যায়।
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
                     data-bs-target="#faq1"
                   >
                     ভয়েস মনিটরিং ফিচার কীভাবে কাজ করে?
@@ -1414,7 +1715,7 @@
                 </h2>
                 <div
                   id="faq1"
-                  class="accordion-collapse collapse show"
+                  class="accordion-collapse collapse"
                   data-bs-parent="#faqAccordion"
                 >
                   <div class="accordion-body">
@@ -1540,18 +1841,18 @@
                 <div
                   class="area-card selected"
                   data-value="dhaka"
-                  data-charge="70"
+                  data-charge="60"
                 >
                   <span class="area-radio"></span>
                   <span class="area-icon">🏙️</span>
                   <span class="area-label">ঢাকার ভিতরে</span>
-                  <span class="area-charge">৳৭০</span>
+                  <span class="area-charge">৳৬০</span>
                 </div>
-                <div class="area-card" data-value="outside" data-charge="130">
+                <div class="area-card" data-value="outside" data-charge="110">
                   <span class="area-radio"></span>
                   <span class="area-icon">🗺️</span>
                   <span class="area-label">ঢাকার বাইরে</span>
-                  <span class="area-charge">৳১৩০</span>
+                  <span class="area-charge">৳১১০</span>
                 </div>
                 <input type="hidden" id="custArea" value="dhaka" required />
 
@@ -1618,63 +1919,20 @@
                   <span>Subtotal</span>
                 </div>
 
-                <div class="summary-product">
-                  <div class="summary-product-thumb">📡</div>
-                  <div class="summary-product-info">
-                    <div class="p-name" id="sumProdName">
-                      GPS Tracker (Voice Control)
-                    </div>
-                    <div class="p-meta" id="sumProdMeta">
-                      SKU: GPS-VC-01 · <span id="sumProdQtyLabel">×1</span>
-                    </div>
-                    <div class="d-flex gap-2 mt-2 flex-wrap align-items-center">
-                      <select
-                        class="form-select form-select-sm"
-                        id="custPack"
-                        style="max-width: 190px"
-                      >
-                        <option
-                          value="2990|1|১টি GPS Tracker|GPS-VC-01"
-                          selected
-                        >
-                          ১টি GPS Tracker
-                        </option>
-                        <option
-                          value="5490|2|২টি GPS Tracker (কম্বো)|GPS-VC-02"
-                        >
-                          ২টি GPS Tracker (কম্বো)
-                        </option>
-                      </select>
-                      <div class="qty-box qty-box-sm">
-                        <button type="button" id="qtyMinus">−</button>
-                        <input
-                          type="number"
-                          id="custQty"
-                          value="1"
-                          min="1"
-                          max="10"
-                          readonly
-                        />
-                        <button type="button" id="qtyPlus">+</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="summary-product-price" id="sumProdPrice">
-                    ৳২,৯৯০
-                  </div>
-                </div>
+                <!-- Cart items render here dynamically -->
+                <div id="summaryItems"></div>
 
                 <div class="summary-row">
-                  <span>Subtotal</span><span id="sumPrice">৳২,৯৯০</span>
+                  <span>Subtotal</span><span id="sumPrice">৳০</span>
                 </div>
                 <div class="summary-row delivery">
                   <span
                     >Delivery
                     <span id="sumDeliveryLabel">(ঢাকার ভিতরে)</span></span
-                  ><span id="sumDelivery">৳৭০</span>
+                  ><span id="sumDelivery">৳৬০</span>
                 </div>
                 <div class="summary-row total">
-                  <span>Total</span><span id="sumTotal">৳৩,০৬০</span>
+                  <span>Total</span><span id="sumTotal">৳০</span>
                 </div>
 
                 <div class="pay-method">
@@ -1694,7 +1952,7 @@
                   class="btn-primary-red w-100"
                   id="submitBtn"
                 >
-                  🛒 অর্ডার করুন ৳ <span id="submitTotal">৩,০৬০.০০</span>
+                  🛒 অর্ডার করুন ৳ <span id="submitTotal">০.০০</span>
                 </button>
               </div>
             </div>
@@ -1736,8 +1994,8 @@
     <!-- ===== Mobile sticky order bar ===== -->
     <div class="mobile-order-bar">
       <div class="price-block">
-        <div class="old">৳৩,৫০০</div>
-        <div class="new" id="mobileBarPrice">৳২,৯৯০</div>
+        <div class="old" id="mobileBarOld">৳৭,০০০</div>
+        <div class="new" id="mobileBarPrice">৳০</div>
       </div>
       <a href="#order" class="btn-primary-red">🛒 অর্ডার করুন</a>
       <a
@@ -1783,47 +2041,43 @@
 
       // ---- Product data ----
       const PRODS = {
-        1: {
-          price: 2990,
-          oldPrice: 3500,
-          qty: 1,
-          label: "১টি GPS Tracker",
-          sku: "GPS-VC-01",
-        },
-        2: {
-          price: 5490,
+        "GPS-VC-01": {
+          price: 3900,
           oldPrice: 7000,
-          qty: 2,
-          label: "২টি GPS Tracker (কম্বো)",
-          sku: "GPS-VC-02",
+          label: "GPS Tracker (Voice Control)",
+          sku: "GPS-VC-01",
+          image: "asset/voice.webp",
+        },
+        "GPS-NV-01": {
+          price: 2900,
+          oldPrice: 5000,
+          label: "GPS Tracker (Non Voice)",
+          sku: "GPS-NV-01",
+          image: "asset/non voice.webp",
         },
       };
 
-      let selectedPackKey = 1; // default single pack
-      let selectedSets = 1; // number of sets user wants
+      // ---- Cart: multiple products can be added together ----
+      let cart = {
+        "GPS-VC-01": 1, // default: Voice Control pre-added with qty 1
+        "GPS-NV-01": 0,
+      };
 
       const packCards = document.querySelectorAll(".pack-card");
-      const custPack = document.getElementById("custPack");
-      const custQty = document.getElementById("custQty");
       const custArea = document.getElementById("custArea");
       const areaCards = document.querySelectorAll(".area-card");
+      const summaryItemsEl = document.getElementById("summaryItems");
+      const submitBtn = document.getElementById("submitBtn");
 
-      function packKeyFromPrice(price) {
-        return price === 5490 ? 2 : 1;
+      function cartQtyTotal() {
+        return Object.values(cart).reduce((a, b) => a + b, 0);
       }
-
-      function highlightPackCards() {
-        packCards.forEach((card) => {
-          const key = packKeyFromPrice(parseInt(card.dataset.price, 10));
-          card.classList.toggle("selected", key === selectedPackKey);
-        });
+      function cartSubtotal() {
+        return Object.entries(cart).reduce(
+          (sum, [sku, qty]) => sum + PRODS[sku].price * qty,
+          0,
+        );
       }
-
-      function syncSelectFromPack() {
-        const p = PRODS[selectedPackKey];
-        custPack.value = `${p.price}|${p.qty}|${p.label}|${p.sku}`;
-      }
-
       function currentAreaCharge() {
         const active = document.querySelector(".area-card.selected");
         return active ? parseInt(active.dataset.charge, 10) : 0;
@@ -1835,53 +2089,74 @@
           : "";
       }
 
-      function updateSummary() {
-        const p = PRODS[selectedPackKey];
-        const itemTotal = p.price * selectedSets;
+      function setQty(sku, qty) {
+        cart[sku] = Math.max(0, Math.min(10, qty));
+        renderPackCards();
+        updateSummary();
+      }
 
-        document.getElementById("sumProdName").textContent =
-          "GPS Tracker (Voice Control)";
-        document.getElementById("sumProdMeta").innerHTML =
-          `SKU: ${p.sku} · <span id="sumProdQtyLabel">${p.label}</span>`;
-        document.getElementById("sumProdPrice").textContent =
-          "৳" + itemTotal.toLocaleString("en-US");
-        document.getElementById("sumPrice").textContent =
-          "৳" + itemTotal.toLocaleString("en-US");
-
-        const deliveryCharge = currentAreaCharge();
-        document.getElementById("sumDelivery").textContent =
-          "৳" + deliveryCharge;
-        document.getElementById("sumDeliveryLabel").textContent =
-          `(${currentAreaLabel()})`;
-
-        const total = itemTotal + deliveryCharge;
-        document.getElementById("sumTotal").textContent =
-          "৳" + total.toLocaleString("en-US");
-        document.getElementById("submitTotal").textContent =
-          total.toLocaleString("en-US") + ".০০";
-        document.getElementById("mobileBarPrice").textContent =
-          "৳" + itemTotal.toLocaleString("en-US");
+      function renderPackCards() {
+        packCards.forEach((card) => {
+          const sku = card.dataset.sku;
+          const qty = cart[sku] || 0;
+          card.querySelector(".pack-qty-val").textContent = qty;
+          card.classList.toggle("selected", qty > 0);
+        });
       }
 
       packCards.forEach((card) => {
-        card.addEventListener("click", () => {
-          selectedPackKey = packKeyFromPrice(parseInt(card.dataset.price, 10));
-          highlightPackCards();
-          syncSelectFromPack();
-          updateSummary();
-          dataLayer.push({
-            event: "select_item",
-            item_id: PRODS[selectedPackKey].sku,
-            item_name: PRODS[selectedPackKey].label,
-          });
-        });
-      });
+        const sku = card.dataset.sku;
 
-      custPack.addEventListener("change", () => {
-        const [price] = custPack.value.split("|").map((v) => v);
-        selectedPackKey = packKeyFromPrice(parseInt(price, 10));
-        highlightPackCards();
-        updateSummary();
+        // Click anywhere on the card = toggle this product in/out of the cart
+        card.style.cursor = "pointer";
+        card.addEventListener("click", () => {
+          const before = cart[sku] || 0;
+          if (before === 0) {
+            setQty(sku, 1);
+            dataLayer.push({
+              event: "add_to_cart",
+              item_id: PRODS[sku].sku,
+              item_name: PRODS[sku].label,
+            });
+          } else {
+            setQty(sku, 0);
+            dataLayer.push({
+              event: "remove_from_cart",
+              item_id: PRODS[sku].sku,
+              item_name: PRODS[sku].label,
+            });
+          }
+        });
+
+        // Qty buttons work independently — stop the click from bubbling to the card
+        card
+          .querySelector('[data-action="plus"]')
+          .addEventListener("click", (e) => {
+            e.stopPropagation();
+            const before = cart[sku] || 0;
+            setQty(sku, before + 1);
+            if (before === 0) {
+              dataLayer.push({
+                event: "add_to_cart",
+                item_id: PRODS[sku].sku,
+                item_name: PRODS[sku].label,
+              });
+            }
+          });
+        card
+          .querySelector('[data-action="minus"]')
+          .addEventListener("click", (e) => {
+            e.stopPropagation();
+            const before = cart[sku] || 0;
+            setQty(sku, before - 1);
+            if (before === 1) {
+              dataLayer.push({
+                event: "remove_from_cart",
+                item_id: PRODS[sku].sku,
+                item_name: PRODS[sku].label,
+              });
+            }
+          });
       });
 
       areaCards.forEach((card) => {
@@ -1893,28 +2168,84 @@
         });
       });
 
-      document.getElementById("qtyPlus").addEventListener("click", () => {
-        selectedSets = Math.min(10, selectedSets + 1);
-        custQty.value = selectedSets;
-        updateSummary();
-      });
-      document.getElementById("qtyMinus").addEventListener("click", () => {
-        selectedSets = Math.max(1, selectedSets - 1);
-        custQty.value = selectedSets;
-        updateSummary();
-      });
+      function updateSummary() {
+        const entries = Object.entries(cart).filter(([, qty]) => qty > 0);
+
+        if (entries.length === 0) {
+          summaryItemsEl.innerHTML =
+            '<div class="summary-empty">আপনার কার্ট খালি — উপরে থেকে একটি প্রোডাক্ট সিলেক্ট করুন 🛒</div>';
+          submitBtn.disabled = true;
+        } else {
+          summaryItemsEl.innerHTML = entries
+            .map(([sku, qty]) => {
+              const p = PRODS[sku];
+              const lineTotal = p.price * qty;
+              return `
+                <div class="summary-product" data-sku="${sku}">
+                  <div class="summary-product-thumb">
+                    <img src="${p.image}" alt="${p.label}" />
+                    <button type="button" class="summary-product-remove" data-remove="${sku}" aria-label="সরিয়ে দিন">&times;</button>
+                  </div>
+                  <div class="summary-product-info">
+                    <div class="p-name">${p.label}</div>
+                    <div class="p-meta">SKU: ${p.sku} · ×${qty}</div>
+                  </div>
+                  <div class="summary-product-price">৳${lineTotal.toLocaleString("en-US")}</div>
+                </div>`;
+            })
+            .join("");
+
+          summaryItemsEl.querySelectorAll("[data-remove]").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const sku = btn.dataset.remove;
+              setQty(sku, 0);
+              dataLayer.push({
+                event: "remove_from_cart",
+                item_id: PRODS[sku].sku,
+                item_name: PRODS[sku].label,
+              });
+            });
+          });
+
+          submitBtn.disabled = false;
+        }
+
+        const subtotal = cartSubtotal();
+        const deliveryCharge = currentAreaCharge();
+        const total = subtotal + deliveryCharge;
+
+        document.getElementById("sumPrice").textContent =
+          "৳" + subtotal.toLocaleString("en-US");
+        document.getElementById("sumDelivery").textContent =
+          "৳" + deliveryCharge;
+        document.getElementById("sumDeliveryLabel").textContent =
+          `(${currentAreaLabel()})`;
+        document.getElementById("sumTotal").textContent =
+          "৳" + total.toLocaleString("en-US");
+        document.getElementById("submitTotal").textContent =
+          total.toLocaleString("en-US") + ".০০";
+        document.getElementById("mobileBarPrice").textContent =
+          "৳" + subtotal.toLocaleString("en-US");
+      }
 
       // init defaults
-      highlightPackCards();
+      renderPackCards();
       updateSummary();
 
       // ---- Form validation & submit ----
       const bdPhoneRegex = /^01[3-9]\d{8}$/;
       const form = document.getElementById("orderForm");
-      const submitBtn = document.getElementById("submitBtn");
 
       form.addEventListener("submit", function (e) {
         e.preventDefault();
+
+        if (cartQtyTotal() === 0) {
+          document
+            .getElementById("pricing")
+            .scrollIntoView({ behavior: "smooth", block: "center" });
+          return;
+        }
+
         let valid = true;
 
         const name = document.getElementById("custName");
@@ -1948,11 +2279,19 @@
           return;
         }
 
-        const p = PRODS[selectedPackKey];
         const deliveryCharge = currentAreaCharge();
-        const itemTotal = p.price * selectedSets;
-        const grandTotal = itemTotal + deliveryCharge;
+        const subtotal = cartSubtotal();
+        const grandTotal = subtotal + deliveryCharge;
         const orderId = "GPS" + Date.now().toString().slice(-8);
+
+        const items = Object.entries(cart)
+          .filter(([, qty]) => qty > 0)
+          .map(([sku, qty]) => ({
+            item_id: PRODS[sku].sku,
+            item_name: PRODS[sku].label,
+            price: PRODS[sku].price,
+            quantity: qty,
+          }));
 
         const orderPayload = {
           order_id: orderId,
@@ -1960,10 +2299,8 @@
           phone: phone.value.trim(),
           area: custArea.value,
           address: address.value.trim(),
-          sku: p.sku,
-          package: p.label,
-          sets: selectedSets,
-          item_total: itemTotal,
+          items: items,
+          subtotal: subtotal,
           delivery_charge: deliveryCharge,
           grand_total: grandTotal,
           note: document.getElementById("custNote").value.trim(),
@@ -1975,14 +2312,7 @@
             transaction_id: orderId,
             value: grandTotal,
             currency: "BDT",
-            items: [
-              {
-                item_id: p.sku,
-                item_name: p.label,
-                price: p.price,
-                quantity: selectedSets,
-              },
-            ],
+            items: items,
           },
         });
 
@@ -2008,17 +2338,13 @@
             document.getElementById("confirmOrderId").textContent = orderId;
             new bootstrap.Modal(document.getElementById("confirmModal")).show();
 
-            submitBtn.disabled = false;
             submitBtn.innerHTML = originalBtnHTML;
             form.reset();
-            selectedPackKey = 1;
-            selectedSets = 1;
-            custQty.value = 1;
+            cart = { "GPS-VC-01": 1, "GPS-NV-01": 0 };
             areaCards.forEach((c) => c.classList.remove("selected"));
             areaCards[0].classList.add("selected");
             custArea.value = areaCards[0].dataset.value;
-            highlightPackCards();
-            syncSelectFromPack();
+            renderPackCards();
             updateSummary();
           });
       });
