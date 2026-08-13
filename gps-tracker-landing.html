@@ -206,6 +206,7 @@
         margin-top: 0.15rem;
       }
 
+      /* ===== Hero visual: Google-Maps style panel ===== */
       .hero-visual {
         position: relative;
         height: clamp(340px, 38vw, 430px);
@@ -214,31 +215,67 @@
         position: absolute;
         inset: 0;
         border-radius: 26px;
-        background: linear-gradient(155deg, #1b1b1b 0%, #0c0c0c 100%);
+        background: #17203a;
         border: 1px solid rgba(255, 255, 255, 0.08);
         box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
         overflow: hidden;
+      }
+      /* Map basemap layers (Google Maps "night mode" vibe) */
+      .map-base {
+        position: absolute;
+        inset: 0;
+      }
+      .map-water {
+        position: absolute;
+        border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%;
+        background: #17263f;
+      }
+      .map-park {
+        position: absolute;
+        border-radius: 30% 70% 60% 40% / 40% 50% 50% 60%;
+        background: #1b2e22;
+      }
+      .map-building {
+        position: absolute;
+        background: #202a44;
+        border-radius: 3px;
+      }
+      .map-roads {
+        position: absolute;
+        inset: 0;
+      }
+      .map-roads .road {
+        position: absolute;
+        background: #3a4566;
+      }
+      .map-roads .road.major {
+        background: #4a577f;
+      }
+      .map-label {
+        position: absolute;
+        font-size: 0.62rem;
+        letter-spacing: 0.03em;
+        color: rgba(255, 255, 255, 0.32);
+        font-weight: 600;
+        white-space: nowrap;
+        pointer-events: none;
       }
       .radar-grid {
         position: absolute;
         inset: 0;
         background-image:
-          linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+          linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
         background-size: 32px 32px;
-        mask-image: radial-gradient(
-          circle at 50% 50%,
-          #000 55%,
-          transparent 90%
-        );
       }
       .radar-ring {
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 46px;
-        height: 46px;
-        border: 2px solid rgba(193, 18, 31, 0.55);
+        width: 56px;
+        height: 56px;
+        border: 2.5px solid rgba(255, 196, 0, 0.85);
+        box-shadow: 0 0 12px rgba(255, 196, 0, 0.55);
         border-radius: 50%;
         transform: translate(-50%, -50%);
         animation: radarPulse 3s ease-out infinite;
@@ -251,9 +288,9 @@
       }
       @keyframes radarPulse {
         0% {
-          width: 46px;
-          height: 46px;
-          opacity: 0.65;
+          width: 56px;
+          height: 56px;
+          opacity: 0.85;
         }
         100% {
           width: 270px;
@@ -261,13 +298,28 @@
           opacity: 0;
         }
       }
-      .radar-pin {
+      /* Google Maps style pin (teardrop) with the red circular badge on top */
+      .map-pin-wrap {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
-        width: 48px;
-        height: 48px;
+        transform: translate(-50%, -100%);
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .map-pin-drop {
+        width: 14px;
+        height: 18px;
+        margin-top: -4px;
+        background: var(--red);
+        clip-path: polygon(50% 100%, 0 35%, 0 0, 100% 0, 100% 35%);
+        filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.45));
+      }
+      .radar-pin {
+        width: 56px;
+        height: 56px;
         background: var(--red);
         border-radius: 50%;
         display: flex;
@@ -276,15 +328,24 @@
         box-shadow:
           0 0 0 8px rgba(193, 18, 31, 0.16),
           0 10px 22px rgba(193, 18, 31, 0.45);
+        border: 3px solid #fff;
         z-index: 3;
         overflow: hidden;
       }
       /* Icon image inside the radar pin — replace src with your own icon */
       .radar-pin img {
-        width: 26px;
-        height: 26px;
+        width: 24px;
+        height: 24px;
         object-fit: contain;
         filter: brightness(0) invert(1); /* makes a simple line icon white */
+      }
+      .map-pin-shadow {
+        width: 20px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.4);
+        filter: blur(1px);
+        margin-top: 2px;
       }
       .hero-chip {
         position: absolute;
@@ -325,12 +386,102 @@
         top: 20px;
         left: 20px;
       }
+      @media (max-width: 575.98px) {
+        .signal-chip,
+        .speed-chip {
+          top: 12px;
+          font-size: 0.62rem;
+          padding: 0.32rem 0.6rem;
+          gap: 0.3rem;
+        }
+        .signal-chip {
+          left: 12px;
+        }
+        .speed-chip {
+          right: 12px;
+        }
+      }
       .voice-chip {
         bottom: 22px;
         left: 20px;
         background: rgba(212, 160, 23, 0.16);
         border-color: rgba(212, 160, 23, 0.4);
         color: #f0d78c;
+      }
+      /* Google Maps style search bar overlay */
+      .map-searchbar {
+        position: absolute;
+        top: 66px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(78%, 300px);
+        background: #1f2a4a;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        padding: 0.5rem 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.74rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.55);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+        z-index: 5;
+      }
+      @media (max-width: 575.98px) {
+        .map-searchbar {
+          top: 56px;
+          font-size: 0.68rem;
+          padding: 0.42rem 0.75rem;
+        }
+      }
+      /* Zoom + locate controls, Google Maps style */
+      .map-controls {
+        position: absolute;
+        right: 14px;
+        bottom: 48px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        z-index: 6;
+      }
+      .map-ctrl-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: #1f2a4a;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.95rem;
+        font-weight: 700;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+      }
+      .map-compass {
+        position: absolute;
+        right: 14px;
+        bottom: 130px;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #1f2a4a;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+        color: var(--red);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+        z-index: 6;
+      }
+      @media (max-width: 380px) {
+        .signal-chip,
+        .speed-chip {
+          font-size: 0.56rem;
+          padding: 0.28rem 0.5rem;
+        }
       }
       .gps-chip {
         position: absolute;
@@ -364,7 +515,16 @@
       }
       @media (max-width: 991.98px) {
         .gps-chip {
-          display: none;
+          width: 84px;
+          padding: 7px 7px 9px;
+          bottom: -12px;
+          right: -6px;
+        }
+        .gps-chip .wire {
+          height: 16px;
+        }
+        .gps-chip .label {
+          font-size: 0.5rem;
         }
       }
       .trust-strip {
@@ -622,27 +782,24 @@
         border-radius: 10px;
       }
       .pack-thumb-badge {
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        z-index: 3;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
         font-size: 0.72rem;
         font-weight: 700;
         padding: 0.32rem 0.65rem;
         border-radius: 999px;
-        display: flex;
-        align-items: center;
-        gap: 0.3rem;
+        margin-bottom: 0.5rem;
       }
       .pack-thumb-badge.voice {
-        background: rgba(212, 160, 23, 0.9);
+        background: rgba(212, 160, 23, 0.14);
         border: 1px solid rgba(212, 160, 23, 0.4);
-        color: #3a2c05;
+        color: #8a6a10;
       }
       .pack-thumb-badge.basic {
-        background: rgba(37, 99, 235, 0.9);
-        border: 1px solid rgba(37, 99, 235, 0.4);
-        color: #fff;
+        background: rgba(37, 99, 235, 0.1);
+        border: 1px solid rgba(37, 99, 235, 0.35);
+        color: #2563eb;
       }
 
       /* Pack card quantity stepper (add multiple products to cart) */
@@ -684,10 +841,13 @@
       .pack-added-badge {
         display: none;
         align-items: center;
-        gap: 0.3rem;
+        gap: 0.35rem;
         font-size: 0.8rem;
         font-weight: 700;
         color: var(--green);
+        background: rgba(22, 163, 74, 0.1);
+        padding: 0.4rem 0.75rem;
+        border-radius: 999px;
       }
       .pack-card.selected .pack-added-badge {
         display: inline-flex;
@@ -1241,20 +1401,73 @@
           <div class="col-lg-6">
             <div class="hero-visual">
               <div class="radar-card">
+                <!-- Google-Maps style basemap -->
+                <div class="map-base">
+                  <div
+                    class="map-water"
+                    style="width: 190px; height: 130px; top: -30px; left: -50px"
+                  ></div>
+                  <div
+                    class="map-park"
+                    style="width: 150px; height: 110px; bottom: -20px; right: -30px"
+                  ></div>
+                  <div class="map-building" style="width: 34px; height: 22px; top: 62px; left: 58px"></div>
+                  <div class="map-building" style="width: 24px; height: 34px; top: 96px; left: 100px"></div>
+                  <div class="map-building" style="width: 40px; height: 20px; bottom: 70px; right: 70px"></div>
+                  <div class="map-building" style="width: 22px; height: 22px; bottom: 40px; right: 120px"></div>
+                  <div class="map-building" style="width: 30px; height: 18px; top: 130px; right: 40px"></div>
+
+                  <div class="map-roads">
+                    <div class="road major" style="left: 0; right: 0; top: 44%; height: 3px; transform: rotate(-2deg)"></div>
+                    <div class="road major" style="top: 0; bottom: 0; left: 38%; width: 3px; transform: rotate(4deg)"></div>
+                    <div class="road" style="left: 0; right: 0; top: 18%; height: 2px; transform: rotate(1deg)"></div>
+                    <div class="road" style="left: 0; right: 0; top: 70%; height: 2px; transform: rotate(-1.5deg)"></div>
+                    <div class="road" style="top: 0; bottom: 0; left: 70%; width: 2px; transform: rotate(-3deg)"></div>
+                    <div class="road" style="top: 0; bottom: 0; left: 15%; width: 2px; transform: rotate(2deg)"></div>
+                    <div class="road" style="left: -10%; width: 60%; top: 30%; height: 2px; transform: rotate(35deg)"></div>
+                  </div>
+
+                  <span class="map-label" style="top: 16px; left: 92px">Gulshan Ave</span>
+                  <span class="map-label" style="top: 100px; left: 12px">Mirpur Rd</span>
+                  <span class="map-label" style="bottom: 54px; right: 24px">Progoti Sarani</span>
+                </div>
+
                 <div class="radar-grid"></div>
                 <div class="radar-ring r1"></div>
                 <div class="radar-ring r2"></div>
                 <div class="radar-ring r3"></div>
-                <!-- 🖼️ radar center icon — replace with your own PNG/SVG (transparent, white/line-art works best) -->
-                <div class="radar-pin">
-                  <img src="asset/icon-car.png" alt="Car" />
+
+                <!-- Center marker: Google-Maps style pin -->
+                <div class="map-pin-wrap">
+                  <div class="radar-pin">
+                    <svg viewBox="0 0 48 24" width="34" height="17" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 17.5V14.8c0-1.1.8-2 1.9-2.2l5.6-.9 3.6-4.4c.6-.8 1.6-1.2 2.6-1.2h9.7c1 0 2 .5 2.6 1.3l3.3 4.3 5.9.9c1.1.2 1.8 1.1 1.8 2.2v2.7c0 .8-.6 1.4-1.4 1.4H4.4c-.8 0-1.4-.6-1.4-1.4z" fill="#fff"/>
+                      <path d="M16.6 7.6h9.4c.5 0 1 .3 1.3.7l2.5 3.3H13.4l2.2-3.2c.2-.4.6-.8 1-.8z" fill="var(--red)"/>
+                      <circle cx="13.5" cy="17.5" r="4.3" fill="#1a1a1a"/>
+                      <circle cx="13.5" cy="17.5" r="1.8" fill="#fff"/>
+                      <circle cx="34.5" cy="17.5" r="4.3" fill="#1a1a1a"/>
+                      <circle cx="34.5" cy="17.5" r="1.8" fill="#fff"/>
+                    </svg>
+                  </div>
+                  <div class="map-pin-drop"></div>
+                  <div class="map-pin-shadow"></div>
                 </div>
+
+                <!-- Google Maps style search bar -->
+                <div class="map-searchbar">🔍 আপনার গাড়ি খুঁজুন</div>
 
                 <span class="hero-chip signal-chip">📶 সিগন্যাল কানেক্টেড</span>
                 <span class="hero-chip speed-chip"
                   ><span class="chip-dot green"></span>২৯ কিমি/ঘণ্টা</span
                 >
                 <span class="hero-chip voice-chip">🎙️ ভয়েস মনিটর চালু</span>
+
+                <!-- Google Maps style zoom + compass controls -->
+                <div class="map-compass">🧭</div>
+                <div class="map-controls">
+                  <span class="map-ctrl-btn">+</span>
+                  <span class="map-ctrl-btn">−</span>
+                </div>
               </div>
               <div class="gps-chip">
                 <div class="wires">
@@ -1469,9 +1682,9 @@
             <div class="pack-card" data-sku="GPS-VC-01">
               <span class="badge-best">জনপ্রিয়</span>
               <div class="pack-thumb">
-                <span class="pack-thumb-badge voice">🎙️ Voice</span>
-                <img src="asset/voice.webp" alt="GPS Tracker Voice Control" loading="lazy" />
+                <img src="asset/GPS Tracker (Voice Control).webp" alt="GPS Tracker Voice Control" loading="lazy" />
               </div>
+              <span class="pack-thumb-badge voice">🎙️ Voice</span>
               <div class="pack-title">GPS Tracker (Voice Control)</div>
               <div class="pack-old">৳৭,০০০</div>
               <div class="pack-new">৳৩,৯০০</div>
@@ -1493,9 +1706,9 @@
           <div class="col-12 col-md-5 col-lg-4">
             <div class="pack-card" data-sku="GPS-NV-01">
               <div class="pack-thumb">
-                <span class="pack-thumb-badge basic">📍 Basic</span>
-                <img src="asset/non voice.webp" alt="GPS Tracker Non Voice" loading="lazy" />
+                <img src="asset/GPS Tracker (Non Voice).webp" alt="GPS Tracker Non Voice" loading="lazy" />
               </div>
+              <span class="pack-thumb-badge basic">📍 Basic</span>
               <div class="pack-title">GPS Tracker (Non Voice)</div>
               <div class="pack-old">৳৫,০০০</div>
               <div class="pack-new">৳২,৯০০</div>
@@ -2184,7 +2397,7 @@
                 <div class="summary-product" data-sku="${sku}">
                   <div class="summary-product-thumb">
                     <img src="${p.image}" alt="${p.label}" />
-                    <button type="button" class="summary-product-remove" data-remove="${sku}" aria-label="সরিয়ে দিন">&times;</button>
+                    <button type="button" class="summary-product-remove" data-remove="${sku}" onmouseover="this.setAttribute('title','রিমুভ করুন')">&times;</button>
                   </div>
                   <div class="summary-product-info">
                     <div class="p-name">${p.label}</div>
