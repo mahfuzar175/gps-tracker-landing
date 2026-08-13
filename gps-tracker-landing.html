@@ -608,6 +608,11 @@
         cursor: not-allowed;
         transform: none;
       }
+      .cart-icon {
+        display: inline-block;
+        vertical-align: -4px;
+        margin-right: 4px;
+      }
       .btn-outline-dark2 {
         border: 2px solid var(--black);
         color: var(--black);
@@ -1413,7 +1418,7 @@
 
             <div class="hero-cta-row d-flex flex-wrap gap-2">
               <a href="#order" class="btn-primary-red"
-                >🛒 অর্ডার করুন — মাত্র ২,৯০০৳ থেকে</a
+                ><svg class="cart-icon" fill="white" width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.5,19A1.5,1.5,0,1,0,10,20.5,1.5,1.5,0,0,0,8.5,19ZM19,16H7a1,1,0,0,1,0-2h8.49121A3.0132,3.0132,0,0,0,18.376,11.82422L19.96143,6.2749A1.00009,1.00009,0,0,0,19,5H6.73907A3.00666,3.00666,0,0,0,3.92139,3H3A1,1,0,0,0,3,5h.92139a1.00459,1.00459,0,0,1,.96142.7251l.15552.54474.00024.00506L6.6792,12.01709A3.00006,3.00006,0,0,0,7,18H19a1,1,0,0,0,0-2ZM17.67432,7l-1.2212,4.27441A1.00458,1.00458,0,0,1,15.49121,12H8.75439l-.25494-.89221L7.32642,7ZM16.5,19A1.5,1.5,0,1,0,18,20.5,1.5,1.5,0,0,0,16.5,19Z"/></svg>অর্ডার করুন — মাত্র ২,৯০০৳ থেকে</a
               >
               <a href="#features" class="btn-outline-light2">ফিচারসমূহ দেখুন</a>
             </div>
@@ -2199,7 +2204,7 @@
                   class="btn-primary-red w-100"
                   id="submitBtn"
                 >
-                  🛒 অর্ডার করুন ৳ <span id="submitTotal">০.০০</span>
+                  <svg class="cart-icon" fill="white" width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.5,19A1.5,1.5,0,1,0,10,20.5,1.5,1.5,0,0,0,8.5,19ZM19,16H7a1,1,0,0,1,0-2h8.49121A3.0132,3.0132,0,0,0,18.376,11.82422L19.96143,6.2749A1.00009,1.00009,0,0,0,19,5H6.73907A3.00666,3.00666,0,0,0,3.92139,3H3A1,1,0,0,0,3,5h.92139a1.00459,1.00459,0,0,1,.96142.7251l.15552.54474.00024.00506L6.6792,12.01709A3.00006,3.00006,0,0,0,7,18H19a1,1,0,0,0,0-2ZM17.67432,7l-1.2212,4.27441A1.00458,1.00458,0,0,1,15.49121,12H8.75439l-.25494-.89221L7.32642,7ZM16.5,19A1.5,1.5,0,1,0,18,20.5,1.5,1.5,0,0,0,16.5,19Z"/></svg>অর্ডার করুন ৳ <span id="submitTotal">০.০০</span>
                 </button>
               </div>
             </div>
@@ -2213,7 +2218,11 @@
       <div class="container">
         <div class="row g-4">
           <div class="col-md-4">
-            <h5>PRODHAN.COM</h5>
+            <img
+              src="https://storage.biddabari.online/biddabari-bucket/uploads/all/9qz4cAe0HhgiQIbXSOOgm3JpVRU0M2bWyelwfijt.webp"
+              alt="PRODHAN.COM"
+              style="height: 34px; width: auto; margin-bottom: 0.9rem"
+            />
             <p style="color: #9c9c9c">
               বিশ্বাস, মানসম্মত পণ্য ও দ্রুত ডেলিভারিতে সারাদেশে গ্রাহকদের
               আস্থার প্রতিষ্ঠান।
@@ -2221,9 +2230,9 @@
           </div>
           <div class="col-md-4">
             <h5>যোগাযোগ</h5>
-            <p class="mb-1">📞 01700-000000</p>
-            <p class="mb-1">🌐 www.prodhan.com</p>
-            <p class="mb-1">📍 বনশ্রী, ঢাকা, বাংলাদেশ</p>
+            <p class="mb-1">📞 <a href="tel:+8809643330000">+880 9643-330000</a></p>
+            <p class="mb-1">🌐 <a href="https://www.prodhan.com" target="_blank" rel="noopener">www.prodhan.com</a></p>
+            <p class="mb-1">📍 ঢাকা, বাংলাদেশ</p>
           </div>
           <div class="col-md-4">
             <h5>দ্রুত লিংক</h5>
@@ -2244,9 +2253,9 @@
         <div class="old" id="mobileBarOld">৳৭,০০০</div>
         <div class="new" id="mobileBarPrice">৳০</div>
       </div>
-      <a href="#order" class="btn-primary-red">🛒 অর্ডার করুন</a>
+      <a href="#order" class="btn-primary-red"><svg class="cart-icon" fill="white" width="18px" height="18px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.5,19A1.5,1.5,0,1,0,10,20.5,1.5,1.5,0,0,0,8.5,19ZM19,16H7a1,1,0,0,1,0-2h8.49121A3.0132,3.0132,0,0,0,18.376,11.82422L19.96143,6.2749A1.00009,1.00009,0,0,0,19,5H6.73907A3.00666,3.00666,0,0,0,3.92139,3H3A1,1,0,0,0,3,5h.92139a1.00459,1.00459,0,0,1,.96142.7251l.15552.54474.00024.00506L6.6792,12.01709A3.00006,3.00006,0,0,0,7,18H19a1,1,0,0,0,0-2ZM17.67432,7l-1.2212,4.27441A1.00458,1.00458,0,0,1,15.49121,12H8.75439l-.25494-.89221L7.32642,7ZM16.5,19A1.5,1.5,0,1,0,18,20.5,1.5,1.5,0,0,0,16.5,19Z"/></svg>অর্ডার করুন</a>
       <a
-        href="tel:+8801700000000"
+        href="tel:+8809643330000"
         style="
           width: 44px;
           height: 44px;
@@ -2257,7 +2266,18 @@
           justify-content: center;
           flex-shrink: 0;
         "
-        >📞</a
+        ><svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.24.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+            fill="#fff"
+          />
+        </svg></a
       >
     </div>
 
