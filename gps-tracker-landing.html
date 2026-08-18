@@ -389,7 +389,7 @@
         }
         .radar-wrap {
     position: absolute;
-    top: 40%;
+    top: 42%;
     left: 49.8%;
     width: 0;
     height: 0;
@@ -400,11 +400,10 @@
     top: 0;
     left: 0;
     width: 56px;
-
-      border: 2.6px solid yellow;
-        box-shadow: 0 0 12px rgb(214, 214, 11);
+    border: 2.6px solid yellow;
+    box-shadow: 0 0 12px rgb(214, 214, 11);
     border-radius: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scaleY(0.45) rotate(-8deg);
     animation: radarPulse 3s ease-out infinite;
 }
 .radar-ring.r2 {
@@ -989,7 +988,7 @@
             margin-bottom: 0.35rem;
         }
         .order-cart-qty {
-            display: none;
+            display: flex;
             align-items: center;
             border: 1.5px solid var(--line);
             border-radius: 8px;
