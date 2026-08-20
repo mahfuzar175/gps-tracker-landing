@@ -76,6 +76,9 @@
     <meta property="og:image:alt"
           content="GPS Tracker Voice and Non Voice">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@600;700;800&display=swap"
         rel="stylesheet"
@@ -86,7 +89,7 @@
     />
     <link
         rel="icon"
-        href="https://skill-man-bucket.s3.ap-south-1.amazonaws.com/uploads/all/4PCgKQGv93MGiJXMIdyMFGboRpRR2GV8YNam0JIE.webp"
+        href="https://storage.biddabari.online/biddabari-bucket/uploads/all/4PCgKQGv93MGiJXMIdyMFGboRpRR2GV8YNam0JIE.webp"
     />
     <link
         rel="stylesheet"
@@ -94,10 +97,11 @@
     />
     <style>
         :root {
-            --red: #c1121f;
+            --red: #e00d18;
             --red-dark: #7a0c0c;
             --black: #111111;
             --ink: #1c1c1c;
+            /* --cream: #f8f5f0; */
             --cream: #f8f5f0;
             --gold: #d4a017;
             --gray: #6b6b6b;
@@ -670,46 +674,193 @@
             border-bottom: 1px solid var(--line);
         }
 
-        /* ===== Feature cards ===== */
-        .feat-card {
-            background: #fff;
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            padding: 1.4rem 1.3rem;
-            height: 100%;
-            transition: 0.25s;
-            position: relative;
-            overflow: hidden;
-        }
-        .feat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-            border-width: 0.5px;
-            border-color: var(--red);
-        }
-        .feat-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 14px;
-            background: rgba(193, 18, 31, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--red);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-        .feat-card h3 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 0.35rem;
-        }
-        .feat-card p {
-            font-size: 0.88rem;
-            color: var(--gray);
-            margin: 0;
-        }
-        .feat-card.voice {
+       /* =========================================
+   FEATURES CARD
+========================================= */
+
+
+.feat-card {
+    background: #F8F5F0;
+    border-radius: var(--radius);
+
+    padding: 1.4rem 1.3rem;
+
+    height: 100%;
+
+    /* Icon + Content পাশাপাশি */
+    display: flex;
+    align-items: center;
+
+    gap: 1.2rem;
+
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform 0.5s ease,
+        border-color 0.5s ease,
+        background 0.5s ease;
+}
+
+
+/* =========================================
+   CARD HOVER
+========================================= */
+
+.feat-card:hover {
+    transform: translateY(-7px);
+
+    /* আপনার চাইলে border ব্যবহার করতে পারবেন */
+    border-width: 0.5px;
+    border-color: var(--red);
+}
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.feat-icon {
+    width: 80px;
+    height: 80px;
+
+    min-width: 80px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+
+    font-size: 1.3rem;
+
+    flex-shrink: 0;
+
+    transition:
+        transform 0.7s ease,
+        background 0.7s ease;
+}
+
+
+/* =========================================
+   ICON HOVER
+========================================= */
+
+.feat-card:hover .feat-icon {
+    transform: translateY(-3px);
+    background: var(--red);
+}
+
+
+/* Icon white হবে hover করলে */
+
+.feat-card:hover .feat-icon i {
+    color: #ffffff !important;
+}
+
+
+/* =========================================
+   TEXT CONTENT
+========================================= */
+
+.feat-content {
+    flex: 1;
+
+    min-width: 0;
+
+    text-align: left;
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.feat-card h3 {
+    font-size: 1.3rem;
+
+    font-weight: 700;
+
+    margin: 0 0 0.35rem 0;
+
+    line-height: 1.35;
+
+    transition: color 0.4s ease;
+}
+
+
+/* Heading hover */
+
+.feat-card:hover h3 {
+    color: var(--red);
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.feat-card p {
+    font-size: 1rem;
+
+    color: var(--gray);
+
+    margin: 0;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 575.98px) {
+
+    .feat-card {
+
+        padding: 1rem;
+
+        gap: 0.8rem;
+
+        align-items: center;
+    }
+
+
+    .feat-icon {
+
+        width: 58px;
+
+        height: 58px;
+
+        min-width: 58px;
+    }
+
+
+    .feat-card h3 {
+
+        font-size: 1.05rem;
+
+        line-height: 1.3;
+
+
+    }
+
+
+    .feat-card p {
+
+        font-size: 0.88rem;
+
+        line-height: 1.4;
+
+    }
+
+}
+        /* .feat-card.voice {
             border: 1.5px solid transparent;
             background: linear-gradient(160deg, rgba(240, 193, 75, 0.1) 0%, #fff 55%);
             box-shadow: 0 14px 32px rgba(212, 160, 23, 0.22);
@@ -725,42 +876,66 @@
         .feat-card.voice .feat-icon {
             background: linear-gradient(145deg, #f0c14b, #d4a017);
             color: #fff;
-        }
+        } */
 
-        /* ===== How it works ===== */
-        .step-item {
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-            padding: 1.1rem 0;
-            border-bottom: 1px dashed var(--line);
-        }
-        .step-item:last-child {
-            border-bottom: none;
-        }
-        .step-num {
-            flex-shrink: 0;
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: var(--black);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-family: "Baloo Da 2", sans-serif;
-        }
-        .step-item h4 {
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
-        }
-        .step-item p {
-            color: var(--gray);
-            font-size: 0.9rem;
-            margin: 0;
-        }
+       /* ===== How it works ===== */
+
+.step-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.1rem 0;
+    border-bottom: 1px dashed var(--line);
+}
+
+.step-item:last-child {
+    border-bottom: none;
+}
+
+.step-num {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+
+    color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 700;
+    font-family: "Baloo Da 2", sans-serif;
+}
+
+/* আলাদা আলাদা Step Color */
+.step-item:nth-child(1) .step-num {
+     background: #16A34A; /*Green */
+}
+
+.step-item:nth-child(2) .step-num {
+    background: #E53935; /* Red */
+}
+
+.step-item:nth-child(3) .step-num {
+    background: #F59E0B; /* Orange/Amber */
+}
+
+.step-item:nth-child(4) .step-num {
+    background: #7C3AED; /* Purple */
+}
+
+.step-item h4 {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.step-item p {
+    color: var(--gray);
+    font-size: 0.9rem;
+    margin: 0;
+}
 
         /* ===== Pricing / package cards ===== */
         .pack-card {
@@ -1748,108 +1923,227 @@
 <!-- ===== Features ===== -->
 <section id="features">
     <div class="container">
-        <div class="text-center mx-auto" style="max-width: 680px">
+
+        <div class="text-center mx-auto" style="max-width: 680px; margin-top: 1.9rem;">
             <span class="section-eyebrow">কেন এই GPS ট্র্যাকার</span>
+
             <h2 class="section-title">
                 আপনার গাড়ির নিরাপত্তায় সম্পূর্ণ স্মার্ট সলিউশন
             </h2>
+
             <p class="section-sub mx-auto">
                 রিয়েল-টাইম ট্র্যাকিং থেকে শুরু করে ভয়েস মনিটরিং সবকিছু একটি
                 ডিভাইসেই।
             </p>
         </div>
 
-        <div class="row g-3 mt-3">
-            <div class="col-6 col-md-6 col-lg-4">
+
+        <div class="row g-3 mt-3 mb-4">
+
+            <!-- 01. Voice Monitoring -->
+            <div class="col-12 col-md-6 col-lg-4">
                 <div class="feat-card voice">
-                    <div class="feat-icon">🎙️</div>
-                    <h3>ভয়েস মনিটরিং ফিচার</h3>
-                    <p>
-                        প্রয়োজনে গাড়ির ভেতরের সাউন্ড শোনার সুবিধা — এক্সট্রা সিকিউরিটি
-                        লেয়ার। (Voice Control ভ্যারিয়েন্টে থাকছে)
-                    </p>
+
+                    <div class="feat-icon">
+                        <i class="fa-solid fa-microphone"
+                           style="font-size: 26px; color: #8B5CF6;"></i>
+                    </div>
+
+                    <div class="feat-content">
+                        <h3 class="mb-3">ভয়েস মনিটরিং ফিচার</h3>
+
+                        <p>
+                            প্রয়োজনে গাড়ির ভেতরের সাউন্ড শোনার সুবিধা এক্সট্রা
+                            সিকিউরিটি লেয়ার। (Voice Control ভ্যারিয়েন্টে থাকছে)
+                        </p>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="col-6 col-md-6 col-lg-4">
+
+            <!-- 02. Live Tracking -->
+            <div class="col-12 col-md-6 col-lg-4">
                 <div class="feat-card">
-                    <div class="feat-icon">📍</div>
-                    <h3>রিয়েল-টাইম লাইভ ট্র্যাকিং</h3>
-                    <p>
-                        যেকোনো সময় আপনার গাড়ির সঠিক অবস্থান জানুন মোবাইল অ্যাপ থেকে।
-                    </p>
+
+                    <div class="feat-icon">
+                        <i class="fa-solid fa-location-dot"
+                           style="font-size: 26px; color: #EF4444;"></i>
+                    </div>
+
+                    <div class="feat-content">
+                        <h3 class="mb-3">রিয়েল-টাইম লাইভ ট্র্যাকিং</h3>
+
+                        <p>
+                            যেকোনো সময় আপনার গাড়ির সঠিক অবস্থান জানুন
+                            মোবাইল অ্যাপ থেকে।
+                        </p>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="col-6 col-md-6 col-lg-4">
+
+            <!-- 03. Instant Alert -->
+            <!--
+            <div class="col-12 col-md-6 col-lg-4">
                 <div class="feat-card">
-                    <div class="feat-icon">🔔</div>
-                    <h3>ইনস্ট্যান্ট অ্যালার্ট</h3>
-                    <p>
-                        নির্দিষ্ট এলাকা ছাড়লে বা কোনো সমস্যা হলে সাথে সাথে নোটিফিকেশন
-                        পাবেন।
-                    </p>
+
+                    <div class="feat-icon">
+                        <i class="fa-solid fa-bell"
+                           style="font-size: 26px; color: #F59E0B;"></i>
+                    </div>
+
+                    <div class="feat-content">
+                        <h3 class="mb-3">ইনস্ট্যান্ট অ্যালার্ট</h3>
+
+                        <p>
+                            নির্দিষ্ট এলাকা ছাড়লে বা কোনো সমস্যা হলে
+                            সাথে সাথে নোটিফিকেশন পাবেন।
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            -->
+
+
+            <!-- 04. Geo Fence -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="feat-card">
+
+                    <div class="feat-icon">
+                        <i class="fa-solid fa-compass"
+                           style="font-size: 26px; color: #10B981;"></i>
+                    </div>
+
+                    <div class="feat-content">
+                        <h3 class="mb-3">জিও-ফেন্স প্রোটেকশন</h3>
+
+                        <p>
+                            নির্দিষ্ট এলাকা সেট করে রাখলে সীমানা ক্রস
+                            করলেই এলার্ট আসবে।
+                        </p>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="col-6 col-md-6 col-lg-4">
+
+            <!-- 05. History Playback -->
+            <div class="col-12 col-md-6 col-lg-4">
                 <div class="feat-card">
-                    <div class="feat-icon">🧭</div>
-                    <h3>জিও-ফেন্স প্রোটেকশন</h3>
-                    <p>
-                        নির্দিষ্ট এলাকা সেট করে রাখলে সীমানা ক্রস করলেই এলার্ট আসবে।
-                    </p>
+
+                    <div class="feat-icon">
+                        <i class="fa-solid fa-clock-rotate-left"
+                           style="font-size: 26px; color: #3B82F6;"></i>
+                    </div>
+
+                    <div class="feat-content">
+                        <h3 class="mb-3">হিস্টোরি প্লেব্যাক</h3>
+
+                        <p>
+                            আগের ট্রিপের সম্পূর্ণ রুট ও তথ্য পরে দেখা যাবে
+                            অ্যাপের মধ্যেই।
+                        </p>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="col-6 col-md-6 col-lg-4">
+
+            <!-- 06. Battery -->
+            <!--
+            <div class="col-12 col-md-6 col-lg-4">
                 <div class="feat-card">
-                    <div class="feat-icon">🕓</div>
-                    <h3>হিস্টোরি প্লেব্যাক</h3>
-                    <p>
-                        আগের ট্রিপের সম্পূর্ণ রুট ও তথ্য পরে দেখা যাবে অ্যাপের মধ্যেই।
-                    </p>
+
+                    <div class="feat-icon">
+                        <i class="fa-solid fa-battery-full"
+                           style="font-size: 26px; color: #22C55E;"></i>
+                    </div>
+
+                    <div class="feat-content">
+                        <h3 class="mb-3">দীর্ঘস্থায়ী ব্যাটারি লাইফ</h3>
+
+                        <p>
+                            বারবার চার্জ দেওয়ার ঝামেলা নেই, দীর্ঘ সময়
+                            নিশ্চিন্তে ব্যবহার করুন।
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            -->
+
+
+            <!-- 07. Mobile App -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="feat-card">
+
+                    <div class="feat-icon">
+                        <i class="fa-solid fa-mobile-screen-button"
+                           style="font-size: 26px; color: #06B6D4;"></i>
+                    </div>
+
+                    <div class="feat-content">
+                        <h3 class="mb-3">ইউজার-ফ্রেন্ডলি অ্যাপ</h3>
+
+                        <p>
+                            সহজে লাইভ ট্র্যাক, হিস্টোরি, অ্যালার্ট ও
+                            সেটিংস ম্যানেজ করা যায়।
+                        </p>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="col-6 col-md-6 col-lg-4">
+
+            <!-- 08. Speed & Power -->
+            <div class="col-12 col-md-6 col-lg-4">
                 <div class="feat-card">
-                    <div class="feat-icon">🔋</div>
-                    <h3>দীর্ঘস্থায়ী ব্যাটারি লাইফ</h3>
-                    <p>
-                        বারবার চার্জ দেওয়ার ঝামেলা নেই, দীর্ঘ সময় নিশ্চিন্তে ব্যবহার
-                        করুন।
-                    </p>
+
+                    <div class="feat-icon">
+                        <i class="fa-solid fa-bolt"
+                           style="font-size: 26px; color: #F97316;"></i>
+                    </div>
+
+                    <div class="feat-content">
+                        <h3 class="mb-3">স্পিড ও পাওয়ার স্ট্যাটাস</h3>
+
+                        <p>
+                            স্পিড, ট্রিপ টাইম, মোট দূরত্ব
+                            সবকিছু এক স্ক্রিনেই দেখুন।
+                        </p>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="col-6 col-md-6 col-lg-4">
-                <div class="feat-card">
-                    <div class="feat-icon">📱</div>
-                    <h3>ইউজার-ফ্রেন্ডলি অ্যাপ</h3>
-                    <p>
-                        সহজে লাইভ ট্র্যাক, হিস্টোরি, অ্যালার্ট ও সেটিংস ম্যানেজ করা যায়।
-                    </p>
-                </div>
-            </div>
 
-            <div class="col-6 col-md-6 col-lg-4">
+            <!-- 09. Weather Resistant -->
+            <!--
+            <div class="col-12 col-md-6 col-lg-4">
                 <div class="feat-card">
-                    <div class="feat-icon">⚡</div>
-                    <h3>স্পিড ও পাওয়ার স্ট্যাটাস</h3>
-                    <p>স্পিড, ট্রিপ টাইম, মোট দূরত্ব — সবকিছু এক স্ক্রিনেই দেখুন।</p>
-                </div>
-            </div>
 
-            <div class="col-6 col-md-6 col-lg-4">
-                <div class="feat-card">
-                    <div class="feat-icon">🛡️</div>
-                    <h3>মজবুত ও ওয়েদার-রেজিস্ট্যান্ট বডি</h3>
-                    <p>বাইরের যেকোনো পরিবেশে নিরাপদে কাজ করার উপযোগী গঠন।</p>
+                    <div class="feat-icon">
+                        <i class="fa-solid fa-shield-halved"
+                           style="font-size: 26px; color: #0EA5E9;"></i>
+                    </div>
+
+                    <div class="feat-content">
+                        <h3 class="mb-3">মজবুত ও ওয়েদার-রেজিস্ট্যান্ট বডি</h3>
+
+                        <p>
+                            বাইরের যেকোনো পরিবেশে নিরাপদে কাজ করার
+                            উপযোগী গঠন।
+                        </p>
+                    </div>
+
                 </div>
             </div>
+            -->
+
         </div>
-
     </div>
 </section>
 
